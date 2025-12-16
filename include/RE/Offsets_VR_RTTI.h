@@ -3363,4 +3363,23 @@ namespace RE
 	inline constexpr REL::ID     RTTI_BGSLoadFormData(static_cast<std::uint64_t>(684848));
 	inline constexpr REL::ID     RTTI_BSModelDB__DBTraits(static_cast<std::uint64_t>(690665));
 	inline constexpr REL::ID     RTTI_TESModelDB____TESProcessor(static_cast<std::uint64_t>(684859));
+	inline constexpr REL::ID     RTTI___ActivateChoiceMenuCallbackFunctor(static_cast<std::uint64_t>(686909));
+	inline constexpr REL::ID     RTTI___MonitorAPO(static_cast<std::uint64_t>(690265));
+	inline constexpr REL::ID     RTTI___ConfirmAndNameCallback(static_cast<std::uint64_t>(688900));
+	inline constexpr REL::ID     RTTI___ConfirmCloseRaceSexMenuCallback(static_cast<std::uint64_t>(688901));
+	inline constexpr REL::ID     RTTI___ConfirmDestructiveChangesCallback(static_cast<std::uint64_t>(688902));
+	inline constexpr REL::ID     RTTI___ConfirmLevelUpAttributeCallback(static_cast<std::uint64_t>(688861));
+	inline constexpr REL::ID     RTTI___DeviceSelectCallback(static_cast<std::uint64_t>(688877));
+	inline constexpr REL::ID     RTTI_IUnknown(static_cast<std::uint64_t>(690268));
+	inline constexpr REL::ID     RTTI_IXAPO(static_cast<std::uint64_t>(690267));
+	inline constexpr REL::ID     RTTI_CXAPOBase(static_cast<std::uint64_t>(690266));
+	inline constexpr REL::ID     RTTI_SkyrimScript__GiftMenuCallbackFunc(static_cast<std::uint64_t>(689189));
+	inline constexpr REL::ID     RTTI___UpdateStarText(static_cast<std::uint64_t>(688912));
+	inline constexpr REL::ID     RTTI___UpdateConstellationAnims(static_cast<std::uint64_t>(688911));
+	inline constexpr REL::ID     RTTI___SpendSoulCallback(static_cast<std::uint64_t>(688869));
+	inline constexpr REL::ID     RTTI_SkyrimScript____ScriptMessageBoxCallback(static_cast<std::uint64_t>(689275));
+	inline constexpr REL::ID     RTTI___PlacePlayerMarkerCallbackFunctor(static_cast<std::uint64_t>(688991));
+	inline constexpr REL::ID     RTTI___MagicMenuAddSpellVisitor(static_cast<std::uint64_t>(688871));
+	inline constexpr REL::ID     RTTI___MagicMenuAddActiveEffectVisitor(static_cast<std::uint64_t>(688872));
+	inline constexpr REL::ID     RTTI_IXAudio2EngineCallback(static_cast<std::uint64_t>(690262));
 }

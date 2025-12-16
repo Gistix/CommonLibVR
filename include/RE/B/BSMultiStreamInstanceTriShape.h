@@ -4,6 +4,7 @@
 
 namespace RE
 {
+
 	class BSMultiStreamInstanceTriShape : public BSInstanceTriShape
 	{
 	public:
@@ -11,12 +12,21 @@ namespace RE
 		inline static constexpr auto Ni_RTTI = NiRTTI_BSMultiStreamInstanceTriShape;
 		inline static constexpr auto VTABLE = VTABLE_BSMultiStreamInstanceTriShape;
 
+		class InstanceGroup : BSMultiBoundAABB
+		{
+			ID3D11Buffer** buffer;         // 40
+			std::uint32_t  unk48;          // 48
+			std::uint32_t  instanceCount;  // 4C
+			bool           unk50;          // 50
+		};
+		static_assert(sizeof(InstanceGroup) == 0x58);
+
 		~BSMultiStreamInstanceTriShape() override;  // 00
 
 		// override (BSInstanceTriShape)
 		const NiRTTI* GetRTTI() const override;                                                                                            // 02
 		NiObject*     CreateClone(NiCloningProcess& a_cloning) override;                                                                   // 17
-		void          OnVisible(NiCullingProcess& a_process) override;                                                                     // 34
+		void          OnVisible(NiCullingProcess& a_process, std::int32_t a_alphaGroupIndex) override;                                     // 34
 		void          Unk_37(void) override;                                                                                               // 37
 		void          BeginAddingInstances(std::uint32_t a_numFloatsPerInstance) override;                                                 // 38
 		void          AddInstances(std::uint32_t a_numFloatsPerInstance, std::uint16_t& a_instanceData) override;                          // 39
@@ -26,14 +36,14 @@ namespace RE
 		void          RemoveGroup(std::uint32_t a_numInstance) override;                                                                   // 3D
 
 		// members
-		BSTArray<void*> unk160;  // 160
-		std::uint32_t   unk178;  // 178
-		std::uint32_t   unk17C;  // 17C
-		std::uint64_t   unk180;  // 180
-		std::uint64_t   unk188;  // 188
-		std::uint32_t   unk190;  // 190
-		std::uint32_t   unk194;  // 194
-		std::uint32_t   unk198;  // 198
+		BSTArray<InstanceGroup*> unk160;              // 160
+		std::uint32_t            instanceGroupCount;  // 178
+		std::uint32_t            unk17C;              // 17C
+		std::uint64_t            unk180;              // 180
+		void*                    groupAlloc;          // 188
+		std::uint32_t            instanceCount;       // 190
+		std::uint32_t            instantceSize;       // 194
+		std::uint32_t            unk198;              // 198
 	private:
 		KEEP_FOR_RE()
 	};

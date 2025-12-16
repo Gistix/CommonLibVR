@@ -26,7 +26,7 @@ namespace RE
 		void          SaveBinary(NiStream& a_stream) override;                                          // 1B
 		bool          IsEqual(NiObject* a_object) override;                                             // 1C
 		void          UpdateSelectedDownwardPass(NiUpdateData& a_data, std::uint32_t a_arg2) override;  // 2D
-		void          OnVisible(NiCullingProcess& a_process) override;                                  // 34
+		void          OnVisible(NiCullingProcess& a_process, std::int32_t a_alphaGroupIndex) override;  // 34
 
 		// add
 		virtual BSTreeNode*     AsTreeNode();      // 3E - { return 0; }

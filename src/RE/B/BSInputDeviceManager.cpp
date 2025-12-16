@@ -65,13 +65,13 @@ namespace RE
 		return mouse && mouse->backgroundMouse;
 	}
 
-	bool BSInputDeviceManager::GetDeviceKeyMapping(INPUT_DEVICE a_device, std::uint32_t a_key, BSFixedString& a_mapping)
+	bool BSInputDeviceManager::GetDeviceButtonNameFromID(INPUT_DEVICE a_device, std::uint32_t a_key, BSFixedString& a_mapping)
 	{
 		auto device = devices[std::to_underlying(a_device)];
 		return device && device->GetButtonNameFromID(a_key, a_mapping);
 	}
 
-	bool BSInputDeviceManager::GetDeviceMappedKeycode(INPUT_DEVICE a_device, std::uint32_t a_key, uint32_t& a_outKeyCode)
+	bool BSInputDeviceManager::GetDeviceKeyCodeFromID(INPUT_DEVICE a_device, std::uint32_t a_key, uint32_t& a_outKeyCode)
 	{
 		auto device = devices[std::to_underlying(a_device)];
 		return device && device->GetKeyCodeFromID(a_key, a_outKeyCode);
@@ -106,7 +106,7 @@ namespace RE
 	{
 		for (std::uint32_t i = 0; i < INPUT_DEVICE::kTotal; i++) {
 			if (devices[i]) {
-				devices[i]->Reset();
+				devices[i]->ClearInputState();
 			}
 		}
 	}
@@ -115,7 +115,7 @@ namespace RE
 	{
 		for (std::uint32_t i = 0; i < INPUT_DEVICE::kTotal; i++) {
 			if (devices[i]) {
-				devices[i]->Release();
+				devices[i]->Shutdown();
 				BSInputDeviceFactory::DestroyInputDevice(devices[i]);
 			}
 		}

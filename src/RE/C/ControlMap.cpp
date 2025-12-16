@@ -121,19 +121,38 @@ namespace RE
 		return func(this, a_context);
 	}
 
-	void ControlMap::ToggleControls(UEFlag a_flags, bool a_enable)
+	void ControlMap::StoreControls()
+	{
+		if (storedControls == UEFlag::kInvalid) {
+			storedControls = enabledControls;
+		}
+	}
+
+	void ControlMap::LoadStoredControls()
+	{
+		if (storedControls != UEFlag::kInvalid) {
+			enabledControls = storedControls;
+			storedControls = UEFlag::kInvalid;
+		}
+	}
+
+	void ControlMap::ToggleControls(UEFlag a_flags, bool a_enable, bool a_storeState)
 	{
 		auto oldState = enabledControls;
 
 		if (a_enable) {
 			enabledControls.set(a_flags);
-			if (unk11C != UEFlag::kInvalid) {
-				unk11C.set(a_flags);
+			if (a_storeState) {
+				if (storedControls != UEFlag::kInvalid) {
+					storedControls.set(a_flags);
+				}
 			}
 		} else {
 			enabledControls.reset(a_flags);
-			if (unk11C != UEFlag::kInvalid) {
-				unk11C.reset(a_flags);
+			if (a_storeState) {
+				if (storedControls != UEFlag::kInvalid) {
+					storedControls.reset(a_flags);
+				}
 			}
 		}
 

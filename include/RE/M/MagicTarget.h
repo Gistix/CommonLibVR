@@ -2,8 +2,7 @@
 
 #include "RE/B/BSContainer.h"
 #include "RE/B/BSPointerHandle.h"
-#include "RE/B/BSTEvent.h"
-#include "RE/B/BSTList.h"
+#include "RE/B/BSSimpleList.h"
 #include "RE/B/BSTSmartPointer.h"
 #include "RE/E/EffectArchetypes.h"
 #include "RE/M/MagicSystem.h"
@@ -27,6 +26,7 @@ namespace RE
 	class MagicItem;
 	class TESBoundObject;
 	class TESObjectREFR;
+	struct Effect;
 
 	struct Effect;
 
@@ -51,11 +51,24 @@ namespace RE
 		};
 		static_assert(sizeof(ForEachActiveEffectVisitor) == 0x8);
 
-		struct ResultsCollector
+		class IPostCreationModification
 		{
+		public:
+			inline static constexpr auto RTTI = RTTI_MagicTarget__IPostCreationModification;
+
+			virtual ~IPostCreationModification();  // 00
+
+			// add
+			virtual void ModifyActiveEffect(ActiveEffect* a_effect) = 0;  // 01
+		};
+		static_assert(sizeof(IPostCreationModification) == 0x8);
+
+		class ResultsCollector
+		{
+		public:
 			MagicTarget*  target;       // 00
 			Actor*        caster;       // 08
-			MagicItem*    spell;        // 10
+			MagicItem*    magicItem;    // 10
 			std::uint16_t immunities;   // 12
 			std::uint16_t nonTrivials;  // 14
 			std::uint32_t pad18;        // 18
@@ -77,20 +90,20 @@ namespace RE
 			bool CheckAddEffect(ActiveEffectFactory::CheckTargetArgs& a_args, float a_resistance);
 
 			// members
-			TESObjectREFR*             caster;            // 00
-			MagicItem*                 magicItem;         // 08
-			Effect*                    effect;            // 10
-			TESBoundObject*            source;            // 18
-			std::uint64_t              unk20;             // 20 - MagicCaster::PostCreationCallback
-			ResultsCollector*          resultsCollector;  // 28
-			NiPoint3                   explosionPoint;    // 30
-			float                      magnitude;         // 3C
-			float                      unk40;             // 40
-			MagicSystem::CastingSource castingSource;     // 44
-			bool                       areaTarget;        // 48
-			bool                       dualCasted;        // 49
-			std::uint16_t              pad4A;             // 4A
-			std::uint32_t              pad4C;             // 4C
+			TESObjectREFR*             caster;                // 00
+			MagicItem*                 magicItem;             // 08
+			Effect*                    effect;                // 10
+			TESBoundObject*            source;                // 18
+			IPostCreationModification* postCreationCallback;  // 20
+			ResultsCollector*          resultsCollector;      // 28
+			NiPoint3                   explosionPoint;        // 30
+			float                      magnitude;             // 3C
+			float                      power;                 // 40
+			MagicSystem::CastingSource castingSource;         // 44
+			bool                       areaTarget;            // 48
+			bool                       dualCasted;            // 49
+			std::uint16_t              pad4A;                 // 4A
+			std::uint32_t              pad4C;                 // 4C
 		};
 		static_assert(sizeof(AddTargetData) == 0x50);
 

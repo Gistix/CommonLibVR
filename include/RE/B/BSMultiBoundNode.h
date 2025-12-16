@@ -20,24 +20,24 @@ namespace RE
 		~BSMultiBoundNode() override;  // 00
 
 		// override (BSNiNode)
-		const NiRTTI*     GetRTTI() const override;                                                 // 02
-		BSMultiBoundNode* AsMultiBoundNode() override;                                              // 06 - { return this; }
-		NiObject*         CreateClone(NiCloningProcess& a_cloning) override;                        // 17
-		void              LoadBinary(NiStream& a_stream) override;                                  // 18
-		void              LinkObject(NiStream& a_stream) override;                                  // 19
-		bool              RegisterStreamables(NiStream& a_stream) override;                         // 1A
-		void              SaveBinary(NiStream& a_stream) override;                                  // 1B
-		bool              IsEqual(NiObject* a_object) override;                                     // 1C
-		void              UpdateDownwardPass(NiUpdateData& a_data, std::uint32_t a_arg2) override;  // 2C
-		void              UpdateWorldBound() override;                                              // 2F
-		void              OnVisible(NiCullingProcess& a_process) override;                          // 34
-		void              UpdateUpwardPass(NiUpdateData& a_data) override;                          // 3D
+		const NiRTTI*     GetRTTI() const override;                                                         // 02
+		BSMultiBoundNode* AsMultiBoundNode() override;                                                      // 06 - { return this; }
+		NiObject*         CreateClone(NiCloningProcess& a_cloning) override;                                // 17
+		void              LoadBinary(NiStream& a_stream) override;                                          // 18
+		void              LinkObject(NiStream& a_stream) override;                                          // 19
+		bool              RegisterStreamables(NiStream& a_stream) override;                                 // 1A
+		void              SaveBinary(NiStream& a_stream) override;                                          // 1B
+		bool              IsEqual(NiObject* a_object) override;                                             // 1C
+		void              UpdateDownwardPass(NiUpdateData& a_data, std::uint32_t a_arg2) override;          // 2C
+		void              UpdateWorldBound() override;                                                      // 2F
+		void              OnVisible(NiCullingProcess& a_process, std::int32_t a_alphaGroupIndex) override;  // 34
+		void              UpdateUpwardPass(NiUpdateData& a_data) override;                                  // 3D
 
 		// add
-		virtual BSMultiBoundRoom* GetMultiBoundRoom();                    // 3E - { return 0; }
-		virtual bool              QPointWithin(const NiPoint3& a_point);  // 3F
-		virtual void              Unk_40(void);                           // 40
-		virtual void              Unk_41(void);                           // 41
+		virtual BSMultiBoundRoom* GetMultiBoundRoom();                             // 3E - { return 0; }
+		virtual bool              QPointWithin(const NiPoint3& a_point);           // 3F
+		virtual bool              CheckBound1(const BSMultiBound& a_targetBound);  // 40
+		virtual bool              CheckBound2(const NiBound& a_targetBound);       // 41
 
 		// members
 		NiPointer<BSMultiBound>           multiBound;     // 128 VR 150

@@ -6,9 +6,12 @@
 
 namespace RE
 {
+	class BSCullingProcess;
+	class BSCompoundFrustum;
 	class BSLight;
 	class BSFogProperty;
 	class BSLensFlareRenderData;
+	class BSPortal;
 	class BSPortalGraph;
 	class BSShadowLight;
 	class BSShadowDirectionalLight;
@@ -43,16 +46,17 @@ namespace RE
 		~ShadowSceneNode() override;  // 00
 
 		// override (NiNode)
-		const NiRTTI* GetRTTI() const override;                         // 02
-		void          OnVisible(NiCullingProcess& a_process) override;  // 34
+		const NiRTTI* GetRTTI() const override;                                                         // 02
+		void          OnVisible(NiCullingProcess& a_process, std::int32_t a_alphaGroupIndex) override;  // 34
 
-		BSLight* AddLight(NiLight* a_light, const LIGHT_CREATE_PARAMS& a_params);
-		void     AddLight(BSLight* a_light);
-		BSLight* GetLight(NiLight* a_light);
-		BSLight* GetPointLight(NiLight* a_light);
-		BSLight* GetShadowLight(NiLight* a_light);
-		void     RemoveLight(NiLight* a_light);
-		void     RemoveLight(const NiPointer<BSLight>& a_light);
+		BSLight*           AddLight(NiLight* a_light, const LIGHT_CREATE_PARAMS& a_params);
+		void               AddLight(BSLight* a_light);
+		BSLight*           GetLight(NiLight* a_light);
+		BSLight*           GetPointLight(NiLight* a_light);
+		BSLight*           GetShadowLight(NiLight* a_light);
+		void               RemoveLight(NiLight* a_light);
+		void               RemoveLight(const NiPointer<BSLight>& a_light);
+		BSCompoundFrustum* BuildSharedCompoundFrustum(BSCullingProcess* a_cullingProcess, BSPortal* a_portal);
 
 		// members
 		std::uint64_t                   unk128;                 // 128
@@ -60,7 +64,7 @@ namespace RE
 		BSTArray<NiPointer<BSLight>>    activeShadowLights;     // 148
 		BSTArray<NiPointer<BSLight>>    lightQueueAdd;          // 160
 		BSTArray<NiPointer<BSLight>>    lightQueueRemove;       // 178
-		BSTArray<NiPointer<BSLight>>    unk190;                 // 190 - unused?
+		BSTArray<NiPointer<BSLight>>    unk190;                 // 190
 		mutable BSSpinLock              lightQueueLock;         // 1A8
 		BSTArray<NiPointer<NiAVObject>> litGeometry;            // 1B0
 		BSTArray<NiPointer<NiAVObject>> objectList1;            // 1C8
@@ -68,7 +72,7 @@ namespace RE
 		mutable BSSpinLock              objectListLock;         // 1F8
 		BSLight*                        sunLight;               // 200
 		BSLight*                        cloudLight;             // 208
-		BSShadowDirectionalLight*       shadowDirLight;         // 210
+		BSShadowDirectionalLight*       sunShadowDirLight;      // 210
 		std::uint8_t                    sceneGraphIndex;        // 218
 		bool                            disableLightUpdate;     // 219
 		bool                            wireframe;              // 21A

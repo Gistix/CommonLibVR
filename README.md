@@ -47,7 +47,7 @@ cmake --preset vs2022-windows-vcpkg
 cmake --build build --config Release
 
 # Skyrim VR
-cmake --preset vs2022-windows-vcpkg-vr
+cmake --preset vs2026-windows-vcpkg-vr
 cmake --build buildvr --config Release
 ```
 

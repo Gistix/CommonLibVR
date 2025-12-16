@@ -101,6 +101,20 @@
       ],
       "name": "vs2022-windows-vcpkg-vr",
       "toolset": "v143"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "/EHsc /MP /W4 /WX /external:anglebrackets /external:W0 $penv{CXXFLAGS}"
+      },
+      "generator": "Visual Studio 18 2026",
+      "inherits": [
+        "vr",
+        "cmake-dev",
+        "vcpkg",
+        "windows"
+      ],
+      "name": "vs2026-windows-vcpkg-vr",
+      "toolset": "v145"
     }
   ],
   "version": 2

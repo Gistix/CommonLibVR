@@ -17,10 +17,10 @@ namespace RE
 		~BGSDecalNode() override;  // 00
 
 		// override (NiNode)
-		const NiRTTI* GetRTTI() const override;                            // 02
-		NiObject*     CreateClone(NiCloningProcess& a_cloning) override;   // 17
-		void          ProcessClone(NiCloningProcess& a_cloning) override;  // 1D
-		void          OnVisible(NiCullingProcess& a_process) override;     // 34
+		const NiRTTI* GetRTTI() const override;                                                         // 02
+		NiObject*     CreateClone(NiCloningProcess& a_cloning) override;                                // 17
+		void          ProcessClone(NiCloningProcess& a_cloning) override;                               // 1D
+		void          OnVisible(NiCullingProcess& a_process, std::int32_t a_alphaGroupIndex) override;  // 34
 
 		// add
 		virtual std::uint8_t Unk_3E();                                               // 3E - { return 1; }

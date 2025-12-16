@@ -37,6 +37,8 @@ namespace RE
 		virtual ~BaseExtraList();  // 00
 #endif
 
+		TES_HEAP_REDEFINE_NEW();
+
 		// members
 		BSExtraData*      data = nullptr;      // 08
 		PresenceBitfield* presence = nullptr;  // 10
@@ -186,12 +188,14 @@ namespace RE
 		bool                  GetWorn() const;
 		bool                  HasQuestObjectAlias();
 		void                  SetCount(std::uint16_t a_count);
+		void                  SetEnchantment(EnchantmentItem* a_enchantment, std::uint16_t a_chargeAmount, bool a_removeOnUnequip);
 		void                  SetEncounterZone(BGSEncounterZone* a_zone);
 		void                  SetExtraFlags(ExtraFlags::Flag a_flags, bool a_enable);
 		void                  SetHeadingTargetRefHandle(ObjectRefHandle& a_handle);
 		void                  SetInventoryChanges(InventoryChanges* a_changes);
 		void                  SetLevCreaModifier(LEV_CREA_MODIFIER a_modifier);
 		void                  SetLinkedRef(TESObjectREFR* a_targetRef, BGSKeyword* a_keyword);
+		void                  SetOverrideName(const char* a_name);
 		void                  SetOwner(TESForm* a_owner);
 
 	private:

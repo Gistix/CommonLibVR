@@ -16,6 +16,12 @@ namespace RE
 		return *selectedRef;
 	}
 
+	TESQuest* Console::GetCommandScriptParentQuest()
+	{
+		static REL::Relocation<TESQuest**> quest{ RELOCATION_ID(0, 504093) };
+		return *quest;
+	}
+
 	void Console::SetSelectedRef(NiPointer<TESObjectREFR> a_refPtr)
 	{
 		ObjectRefHandle handle(a_refPtr.get());

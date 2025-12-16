@@ -28,22 +28,6 @@ namespace RE
 
 		static BSInputEventQueue* GetSingleton();
 
-		template <class T>
-		T* GetCachedEvent();
-
-		template <class T>
-		void AdvanceCount();
-
-		template <class T, class... Args>
-		void AddEvent(Args&&... args)
-		{
-			if (auto cachedEvent = GetCachedEvent<T>()) {
-				cachedEvent->Init(std::forward<Args>(args)...);
-				PushOntoInputQueue(cachedEvent);
-				AdvanceCount<T>();
-			}
-		}
-
 		template <class... Args>
 		void AddButtonEvent(Args&&... args)
 		{
@@ -105,14 +89,30 @@ namespace RE
 		ThumbstickEvent    thumbstickEvents[MAX_THUMBSTICK_EVENTS];  // 2D0
 		DeviceConnectEvent connectEvents[MAX_CONNECT_EVENTS];        // 330
 		KinectEvent        kinectEvents[MAX_KINECT_EVENTS];          // 350
+
 #ifdef SKYRIMVR
 		VrWandTouchpadPositionEvent vrTouchpadPositionEvents[MAX_VR_TOUCHPAD_POSITION_EVENTS];
 		VrWandTouchpadSwipeEvent    vrTouchpadSwipeEvents[MAX_VR_TOUCHPAD_SWIPE_EVENTS];
 #endif
 		InputEvent* queueHead;  // 380
 		InputEvent* queueTail;  // 388
+
 	private:
-		KEEP_FOR_RE()
+		template <class T>
+		T* GetCachedEvent();
+
+		template <class T>
+		void AdvanceCount();
+
+		template <class T, class... Args>
+		void AddEvent(Args&&... args)
+		{
+			if (auto cachedEvent = GetCachedEvent<T>()) {
+				cachedEvent->Init(std::forward<Args>(args)...);
+				PushOntoInputQueue(cachedEvent);
+				AdvanceCount<T>();
+			}
+		}
 	};
 #ifndef SKYRIMVR
 	static_assert(sizeof(BSInputEventQueue) == 0x390);

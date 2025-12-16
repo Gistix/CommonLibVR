@@ -53,7 +53,6 @@ namespace RE
 			unkVR28 = a_arg2;
 		}
 #endif
-
 		[[nodiscard]] constexpr float Value() const noexcept
 		{
 			return value;

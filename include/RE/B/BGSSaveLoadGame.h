@@ -1,8 +1,10 @@
 #pragma once
 
+#include "RE/B/BGSConstructFormsInAllFilesMap.h"
 #include "RE/B/BSPointerHandle.h"
 #include "RE/B/BSTArray.h"
 #include "RE/B/BSTHashMap.h"
+#include "RE/T/TESDataHandler.h"
 
 namespace RE
 {
@@ -17,60 +19,77 @@ namespace RE
 	{
 	public:
 		// members
-		BSTHashMap<FormID, FormID> unk00;  // 00
-		BSTHashMap<FormID, FormID> unk30;  // 30
-		std::uint32_t              unk60;  // 60
-		std::uint32_t              pad64;  // 64
+		BSTHashMap<FormID, std::uint32_t> formIDToIndex;  // 00
+		BSTHashMap<std::uint32_t, FormID> indexToFormID;  // 30
+		std::uint32_t                     nextIndex;      // 60
+		std::uint32_t                     pad64;          // 64
 	private:
 		KEEP_FOR_RE()
 	};
 	static_assert(sizeof(BGSSaveLoadFormIDMap) == 0x68);
 
+	class BGSCellNumericIDArrayMap : public BSTHashMap<FormID, BSTArray<FormID>>
+	{
+	};
+	static_assert(sizeof(BGSCellNumericIDArrayMap) == 0x30);
+
 	class BGSSaveLoadReferencesMap
 	{
 	public:
 		// members
-		BSTHashMap<FormID, FormID>                 unk00;  // 00
-		BSTHashMap<FormID, BSTArray<FormID>>       unk30;  // 30
-		BSTHashMap<FormID, BGSCellFormIDArrayMap*> unk60;  // 60
+		BSTHashMap<FormID, FormID>                           movedReferences;  // 00
+		BGSCellNumericIDArrayMap                             cellReferences;   // 30 - interior or sky cells
+		BSTHashMap<std::uint32_t, BGSCellNumericIDArrayMap*> worldReferences;  // 60 - grid X/Y packed into 32 bit key
 	private:
 		KEEP_FOR_RE()
 	};
 	static_assert(sizeof(BGSSaveLoadReferencesMap) == 0x90);
 
-	class BGSConstructFormsInAllFilesMap
+	struct QUEUED_SUB_BUFFER_TYPES
 	{
-	public:
-		// members
-		BSTHashMap<TESFile*, BGSConstructFormsInFileMap*> unk00;     // 00
-		BSTArray<void*>                                   unk30[3];  // 30
-		std::uint32_t                                     unk78;     // 78
+		enum QUEUED_SUB_BUFFER_TYPE
+		{
+			kUnk0,
+			kUnk1,
+			kUnk2,
+
+			kTotal
+		};
+
 	private:
 		KEEP_FOR_RE()
 	};
-	static_assert(sizeof(BGSConstructFormsInAllFilesMap) == 0x80);
+	using QUEUED_SUB_BUFFER_TYPE = QUEUED_SUB_BUFFER_TYPES::QUEUED_SUB_BUFFER_TYPE;
 
 	class BGSSaveLoadQueuedSubBufferMap
 	{
 	public:
-		// members
-		BSTHashMap<TESForm*, BGSLoadGameSubBuffer> queuedSubBuffers[3];  // 00
+		BSTHashMap<TESForm*, BGSLoadGameSubBuffer> maps[QUEUED_SUB_BUFFER_TYPES::kTotal];
+
 	private:
 		KEEP_FOR_RE()
 	};
 	static_assert(sizeof(BGSSaveLoadQueuedSubBufferMap) == 0x90);
 
+	class BGSSaveLoadHistory
+	{
+	public:
+		// members
+		BSTArray<const char*> notes;  // 00
+	};
+	static_assert(sizeof(BGSSaveLoadHistory) == 0x18);
+
 	class BGSSaveLoadGame
 	{
 	public:
-		enum class Flags
+		enum class GlobalFlags
 		{
 			kGlobalAllowChanges = 1 << 0,
-			kLoading = 1 << 1,
-			kSaving = 1 << 2,
+			kSaveGameLoading = 1 << 1,
+			kSaveGameSaving = 1 << 2,
 			kInitingForms = 1 << 3,
 			kDeferInitForms = 1 << 4,
-			kPositioningPlayer = 1 << 5,
+			kPositioningPlayerCharacter = 1 << 5,
 			kPlayerLocationInvalid = 1 << 6
 		};
 
@@ -94,27 +113,33 @@ namespace RE
 			return func(this, a_formID);
 		}
 
+		[[nodiscard]] bool GetGlobalAllowChanges() const noexcept { return globalFlags.all(GlobalFlags::kGlobalAllowChanges); }
+		[[nodiscard]] bool GetSaveGameLoading() const noexcept { return globalFlags.all(GlobalFlags::kSaveGameLoading); }
+		[[nodiscard]] bool GetSaveGameSaving() const noexcept { return globalFlags.all(GlobalFlags::kSaveGameSaving); }
+		[[nodiscard]] bool GetInitingForms() const noexcept { return globalFlags.all(GlobalFlags::kInitingForms); }
+		[[nodiscard]] bool GetDeferInitForms() const noexcept { return globalFlags.all(GlobalFlags::kDeferInitForms); }
+		[[nodiscard]] bool GetPositioningPlayerCharacter() const noexcept { return globalFlags.all(GlobalFlags::kPositioningPlayerCharacter); }
+
 // members
 #ifndef SKYRIMVR
-		BSTArray<TESFile*> pluginList;  // 000
-		BSTArray<void*>    unk18;       // 018
+		TESFileCollection savedFiles;  // 000
 #else
 		std::uint8_t pluginList[0xFF];  // 000
 		std::uint8_t unk18[0xFF];       // 0FF
 #endif
-		BGSSaveLoadFormIDMap               worldspaceFormIDMap;  // 030
-		BSTHashMap<FormID, ActorHandle>    unk98;                // 098
-		BGSSaveLoadReferencesMap           unkC8;                // 0C8
-		BSTHashMap<FormID, FormID>         unk158;               // 158
-		BGSConstructFormsInAllFilesMap     reconstructFormsMap;  // 188
-		BGSSaveLoadQueuedSubBufferMap      queuedSubBuffersMap;  // 208
-		BGSSaveLoadFormIDMap               formIDMap;            // 298
-		BSTArray<void*>                    saveLoadHistory;      // 300
-		BSTArray<void*>                    unk318;               // 318
-		BGSSaveLoadChangesMap*             saveLoadChanges;      // 330, VR 500
-		std::uint64_t                      unk338;               // 338, VR 508
-		REX::EnumSet<Flags, std::uint32_t> flags;                // 340, VR 510
-		std::uint8_t                       currentMinorVersion;  // 344, VR 514
+		BGSSaveLoadFormIDMap                     worldspaceFormIDMap;         // 030
+		BSTHashMap<std::uint32_t, ActorHandle>   queuedInitPackageLocations;  // 098
+		BGSSaveLoadReferencesMap                 references;                  // 0C8
+		BSTHashMap<FormID, FormID>               changedFormIDs;              // 158
+		BGSConstructFormsInAllFilesMap           reconstructFormsMap;         // 188
+		BGSSaveLoadQueuedSubBufferMap            queuedSubBuffersMap;         // 208
+		BGSSaveLoadFormIDMap                     formIDMap;                   // 298
+		BGSSaveLoadHistory                       history;                     // 300
+		BSTArray<BGSLoadFormData*>               loadFormData;                // 318
+		BGSSaveLoadChangesMap*                   changesMap;                  // 330, VR 500
+		BGSSaveLoadChangesMap*                   oldChangesMap;               // 338, VR 508
+		REX::EnumSet<GlobalFlags, std::uint32_t> globalFlags;                 // 340, VR 510
+		std::uint8_t                             currentMinorVersion;         // 344, VR 514
 	private:
 		KEEP_FOR_RE()
 	};

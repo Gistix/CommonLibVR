@@ -27,7 +27,7 @@ namespace RE
 		void          UpdateRigidDownwardPass(NiUpdateData& a_data, std::uint32_t a_arg2) override;                                // 2E
 		void          UpdateWorldBound() override;                                                                                 // 2F
 		void          UpdateWorldData(NiUpdateData* a_data) override;                                                              // 30
-		void          OnVisible(NiCullingProcess& a_process) override;                                                             // 34
+		void          OnVisible(NiCullingProcess& a_process, std::int32_t a_alphaGroupIndex) override;                             // 34
 
 		// members
 		float         time;               // 198

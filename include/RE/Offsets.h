@@ -64,59 +64,9 @@ namespace RE
 			inline constexpr REL::ID Update3DModel(static_cast<std::uint64_t>(39395));
 		}
 
-		namespace ArmorRatingVisitor
+		namespace BaseExtraList
 		{
-			inline constexpr REL::ID HaveNotVisitedArmor(static_cast<std::uint64_t>(40297));
-			inline constexpr REL::ID VisitArmor(static_cast<std::uint64_t>(40293));
-		}
-
-		namespace ArmorRatingVisitorBase
-		{
-			inline constexpr REL::ID Visit(static_cast<std::uint64_t>(40299));
-		}
-
-		namespace AttackBlockHandler
-		{
-			inline constexpr REL::ID Vtbl(static_cast<std::uint64_t>(208719));
-		}
-
-		namespace AutoMoveHandler
-		{
-			inline constexpr REL::ID Vtbl(static_cast<std::uint64_t>(208725));
-		}
-
-		namespace BarterMenu
-		{
-			inline constexpr REL::ID TargetRefHandle(static_cast<std::uint64_t>(403520));
-		}
-
-		namespace BGSAddToPlayerInventoryEvent
-		{
-			inline constexpr REL::ID GetIndex(static_cast<std::uint64_t>(380074));
-		}
-
-		namespace BGSCreatedObjectManager
-		{
-			inline constexpr REL::ID CreateArmorEnchantment(static_cast<std::uint64_t>(36166));
-			inline constexpr REL::ID CreateWeaponEnchantment(static_cast<std::uint64_t>(36165));
-			inline constexpr REL::ID Singleton(static_cast<std::uint64_t>(400320));
-		}
-
-		namespace BGSDefaultObjectManager
-		{
-			inline constexpr REL::ID GetSingleton(static_cast<std::uint64_t>(13894));
-		}
-
-		namespace BGSEntryPoint
-		{
-			inline constexpr REL::ID EntryPoints(static_cast<std::uint64_t>(368994));
-			inline constexpr REL::ID HandleEntryPoint(static_cast<std::uint64_t>(23526));
-		}
-
-		namespace BGSEntryPointFunction
-		{
-			inline constexpr REL::ID EntryPointFunctions(static_cast<std::uint64_t>(369178));
-			inline constexpr REL::ID EntryPointFunctionTypeArgumentCount(static_cast<std::uint64_t>(369210));
+			inline constexpr REL::ID Dtor(static_cast<std::uint64_t>(11572));
 		}
 
 		namespace BGSFootstepManager
@@ -295,6 +245,7 @@ namespace RE
 			namespace ObjectBindPolicy
 			{
 				inline constexpr REL::ID BindObject(static_cast<std::uint64_t>(104184));
+				inline constexpr REL::ID GetInitialPropertyValues(static_cast<std::uint64_t>(104176));
 			}
 
 			namespace NF_util
@@ -1183,10 +1134,6 @@ namespace RE
 		}
 
 		inline constexpr REL::ID CreateRefHandle(static_cast<std::uint64_t>(12326));
-		inline constexpr REL::ID DebugNotification(static_cast<std::uint64_t>(52933));
-		inline constexpr REL::ID GetArmorFinalRating(static_cast<std::uint64_t>(16017));
-		inline constexpr REL::ID GlobalStateCounter(static_cast<std::uint64_t>(400305));
-		inline constexpr REL::ID LogDirectory(static_cast<std::uint64_t>(380738));
 		inline constexpr REL::ID LookupReferenceByHandle(static_cast<std::uint64_t>(12332));
 		inline constexpr REL::ID PlaySound(static_cast<std::uint64_t>(52939));
 		inline constexpr REL::ID RTDynamicCast(static_cast<std::uint64_t>(109689));
@@ -1366,6 +1313,7 @@ namespace RE
 			namespace ObjectBindPolicy
 			{
 				inline constexpr REL::ID BindObject(static_cast<std::uint64_t>(97379));
+				inline constexpr REL::ID GetInitialPropertyValues(static_cast<std::uint64_t>(97371));
 			}
 
 			namespace NF_util
@@ -2000,7 +1948,6 @@ namespace RE
 		}
 
 		inline constexpr REL::ID CreateRefHandle(static_cast<std::uint64_t>(12193));
-		inline constexpr REL::ID DebugNotification(static_cast<std::uint64_t>(52050));
 		inline constexpr REL::ID LookupReferenceByHandle(static_cast<std::uint64_t>(12204));
 		inline constexpr REL::ID PlaySound(static_cast<std::uint64_t>(52054));
 		inline constexpr REL::ID TlsIndex(static_cast<std::uint64_t>(528600));

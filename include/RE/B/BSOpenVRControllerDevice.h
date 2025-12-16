@@ -28,8 +28,8 @@ namespace RE
 
 		// override (BSIInputDevice)
 		virtual void Initialize() override;
-		virtual void Process(float a_arg1) override;
-		virtual void Reset() override;
+		virtual void Poll(float a_arg1) override;
+		virtual void ClearInputState() override;
 
 		// members
 		std::uint64_t unk80[0x16];  // 080

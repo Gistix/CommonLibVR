@@ -4,6 +4,8 @@
 
 namespace RE
 {
+	class MessageBoxData;
+
 	// menuDepth = 10
 	// flags = kPausesGame | kAlwaysOpen | kUsesCursor | kModal
 	// context = kMenuMode
@@ -20,11 +22,15 @@ namespace RE
 		void               Accept(CallbackProcessor* a_processor) override;  // 01
 		UI_MESSAGE_RESULTS ProcessMessage(UIMessage& a_message) override;    // 04
 
+		static MessageBoxMenu* GetCurrentMessageBoxMenu();
+		static std::uint32_t   GetQueueSize();
+		static void            QueueMessage(MessageBoxData* a_data);
+
 		// members
-		std::uint8_t  unk30;  // 30
-		std::uint8_t  pad31;  // 31
-		std::uint16_t pad32;  // 32
-		std::uint32_t pad34;  // 34
+		bool          isPopulated;  // 30
+		std::uint8_t  pad31;        // 31
+		std::uint16_t pad32;        // 32
+		std::uint32_t pad34;        // 34
 	private:
 		KEEP_FOR_RE()
 	};
