@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RE/N/NiAlphaAccumulator.h"
+#include "RE/N/NiColor.h"
 
 namespace RE
 {
