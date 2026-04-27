@@ -40,7 +40,7 @@ namespace RE
 		std::uint8_t                               pad01;             // 01
 		std::uint16_t                              pad02;             // 02
 		std::uint32_t                              pad04;             // 04
-		BSTArray<BSTSmartPointer<AnimationObject>> animationObjects;  // 08
+		BSTArray<AnimationObject>				   animationObjects;  // 08
 		BSSpinLock                                 lock;              // 20
 	};
 	static_assert(sizeof(AnimationObjects) == 0x28);
