@@ -1,3 +1,25 @@
+## [4.17.0](https://github.com/alandtse/CommonLibVR/compare/v4.16.0...v4.17.0) (2026-05-02)
+
+### Features
+
+* merge po3 ([529d8f2](https://github.com/alandtse/CommonLibVR/commit/529d8f27a218bcd6f8f02acf9a26b847d545cf9b))
+
+### Bug Fixes
+
+* Missing include in TutorialMenu.cpp ([34a6cec](https://github.com/alandtse/CommonLibVR/commit/34a6cecffce5abe5fcf5b36aab1339e7bd77d6bb))
+
+## [4.16.0](https://github.com/alandtse/CommonLibVR/compare/v4.15.1...v4.16.0) (2026-05-02)
+
+### Features
+
+* **VR:** identify BSVRInterface/BSOpenVR vtable ([#148](https://github.com/alandtse/CommonLibVR/issues/148)) ([24f7c39](https://github.com/alandtse/CommonLibVR/commit/24f7c39b93600e83f35615bfc2ded3cb9b717910))
+
+## [4.15.1](https://github.com/alandtse/CommonLibVR/compare/v4.15.0...v4.15.1) (2026-05-01)
+
+### Bug Fixes
+
+* add runtime data acessor for bssubindextrishape ([#147](https://github.com/alandtse/CommonLibVR/issues/147)) ([c3c3849](https://github.com/alandtse/CommonLibVR/commit/c3c3849900cb7604f71d6095799f75c88a403e4f))
+
 ## [4.15.0](https://github.com/alandtse/CommonLibVR/compare/v4.14.0...v4.15.0) (2026-04-27)
 
 ### Features

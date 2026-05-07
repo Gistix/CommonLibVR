@@ -647,6 +647,7 @@ set(SOURCES
 	include/RE/C/CommandTable.h
 	include/RE/C/CommonTypeTraits.h
 	include/RE/C/CompactingStore.h
+	include/RE/C/Compass.h
 	include/RE/C/CompiledScriptLoader.h
 	include/RE/C/CompressedArchiveStream.h
 	include/RE/C/ConcreteFormFactory.h
@@ -1167,6 +1168,7 @@ set(SOURCES
 	include/RE/H/hkbVariableInfo.h
 	include/RE/H/hkbVariableValueSet.h
 	include/RE/H/hkp3AxisSweep.h
+	include/RE/H/hkpAabbPhantom.h
 	include/RE/H/hkpAction.h
 	include/RE/H/hkpAgentNnTrack.h
 	include/RE/H/hkpAllCdPointCollector.h
@@ -1244,8 +1246,11 @@ set(SOURCES
 	include/RE/H/hkpShapeContainer.h
 	include/RE/H/hkpShapePhantom.h
 	include/RE/H/hkpShapeRayCastCollectorOutput.h
+	include/RE/H/hkpShapeRayCastInput.h
 	include/RE/H/hkpShapeRayCastOutput.h
 	include/RE/H/hkpShapeType.h
+	include/RE/H/hkpSimpleShapePhantom.h
+	include/RE/H/hkpSimpleWorldRayCaster.h
 	include/RE/H/hkpSimplexSolver.h
 	include/RE/H/hkpSimulationIsland.h
 	include/RE/H/hkpSingleShapeContainer.h
@@ -1263,6 +1268,7 @@ set(SOURCES
 	include/RE/H/hkpWorldPostSimulationListener.h
 	include/RE/H/hkpWorldRayCastInput.h
 	include/RE/H/hkpWorldRayCastOutput.h
+	include/RE/H/hkpWorldRayCaster.h
 	include/RE/I/IAIWorldLocationHandle.h
 	include/RE/I/IAnimationClipLoaderSingleton.h
 	include/RE/I/IAnimationGraphManagerHolder.h
@@ -2258,6 +2264,7 @@ set(SOURCES
 	src/RE/H/hkbBehaviorGraph.cpp
 	src/RE/H/hkbBehaviorGraphData.cpp
 	src/RE/H/hkbVariableValueSet.cpp
+	src/RE/H/hkpAabbPhantom.cpp
 	src/RE/H/hkpBroadPhase.cpp
 	src/RE/H/hkpCdBody.cpp
 	src/RE/H/hkpCharacterProxyListener.cpp
@@ -2265,6 +2272,7 @@ set(SOURCES
 	src/RE/H/hkpMaterial.cpp
 	src/RE/H/hkpProperty.cpp
 	src/RE/H/hkpRigidBody.cpp
+	src/RE/H/hkpShapePhantom.cpp
 	src/RE/H/hkpWorldObject.cpp
 	src/RE/I/IAnimationGraphManagerHolder.cpp
 	src/RE/I/IFormFactory.cpp
