@@ -26,8 +26,8 @@ namespace RE
 		{
 #define RUNTIME_DATA_CONTENT                              \
 	BSTArray<InstanceGroup*> unk160;             /* 00 */ \
-	std::uint32_t            instanceGroupCount; /* 18 */ \
-	std::uint32_t            unk17C;             /* 1C */ \
+	std::uint32_t            groupBaseOffset;      /* 18 - instanceGroupCount;  */ \
+	std::uint32_t            maxInstancesPerGroup; /* 1C - unk17C;             */ \
 	float                    renderDistance;     /* 20 */ \
 	std::uint32_t            unk184;             /* 24 */ \
 	void*                    groupAlloc;         /* 28 */ \
